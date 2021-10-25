@@ -1,20 +1,53 @@
 #root {
   color: rgb(236, 227, 227);
+  text-align: center;
 }
-body{
+body {
   background-color: rgb(67, 67, 100);
 }
 
-.thumb-nail{
+footer a {
+  color:rgb(211, 114, 162);
+  text-decoration: none;
+  background-color: lawngreen;
+  
+}
+a:hover {
+  font-size: 1.1em;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.thumb-nail {
   width: 100%;
 }
 
+h1 {
+  text-align: center;
+  color: rgb(196, 196, 202);
+}
 
+h2 {
+  font-weight: 100;
+  border-style: ridge;
+  height: 4rem;
+    
+  }
+footer{
+  display: flex;
+  flex-direction: column;
+  
+}
 
 @media (min-width : 800px) {
   #root{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     
   }
   .card{
@@ -25,14 +58,11 @@ body{
     background-color: rgb(179, 105, 57);
     padding: 1rem;
   }
-  h1{
-    text-align: center;
-    color: rgb(196, 196, 202);
+  footer{
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color: lavenderblush;
   }
-
-  h2{
-    font-weight: 100;
-    border-style: ridge;
-    height: 4rem;
-  }
+  
 }
