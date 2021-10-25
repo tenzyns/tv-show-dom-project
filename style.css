@@ -1,3 +1,38 @@
 #root {
-  color: red;
+  color: rgb(236, 227, 227);
+}
+body{
+  background-color: rgb(67, 67, 100);
+}
+
+.thumb-nail{
+  width: 100%;
+}
+
+
+
+@media (min-width : 800px) {
+  #root{
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+  .card{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 1rem;
+    background-color: rgb(179, 105, 57);
+    padding: 1rem;
+  }
+  h1{
+    text-align: center;
+    color: rgb(196, 196, 202);
+  }
+
+  h2{
+    font-weight: 100;
+    border-style: ridge;
+    height: 4rem;
+  }
 }
