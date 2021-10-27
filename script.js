@@ -9,7 +9,7 @@ function setup() {
     cardEl.className = "card";
     rootElem.appendChild(cardEl);
 
-   const headingEl = document.createElement("h2");
+    const headingEl = document.createElement("h2");
    //getting episode and season number with formatted double digits
     headingEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
     
@@ -21,7 +21,7 @@ function setup() {
     //episode image attached to anchor tag
     const thumbNail = document.createElement("img");
     thumbNail.src = episode.image.medium;
-    thumbNail.alt = "episode thumbnail";
+    thumbNail.alt = `episode thumbnail for ${episode.name}`;
     thumbNail.className = "thumb-nail";
     urlEpisode.appendChild(thumbNail);
 
@@ -34,7 +34,30 @@ function setup() {
 
     
     });
-}
+
+    //---------Search box ------------
+    const searchBox = document.getElementById("search");
+    const searchTerm = searchBox.value.toUpperCase();
+    searchBox.addEventListener("keyup", searchEpisodes);
+
+    function searchEpisodes(){
+      const allCards = document.getElementsByClassName("card");
+       
+      for(let i = 0; i < allCards.length; i++){
+
+        const episodeName = allCards[i].getElementsByTagName("h2")[0];
+        const summary = allCards[i].getElementsByTagName("p");
+        const episodeText = episodeName.textContent || episodeName.innerText;
+       const summaryText = summary.textContent || summary.innerText;
+        if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
+          allCards[i].style.display = "";
+        } else {
+            allCards[i].style.display = "none";
+          }
+      };
+
+    }  
+  }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");

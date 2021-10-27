@@ -1,3 +1,8 @@
+body {
+  box-sizing: border-box;
+  color:rgb(236, 227, 227)
+}
+
 #root {
   color: rgb(236, 227, 227);
   text-align: center;
@@ -9,17 +14,19 @@ body {
 footer a {
   color:rgb(211, 114, 162);
   text-decoration: none;
-  background-color: lawngreen;
   
 }
+
 a:hover {
-  font-size: 1.1em;
+  text-decoration-line: underline;
 }
 .card {
     display: flex;
     flex-direction: column;
     width: 90%;
     border-radius: 5px;
+    margin: 1rem;
+    background-color: rgb(179, 105, 57);
 }
 
 .thumb-nail {
@@ -29,6 +36,7 @@ a:hover {
 h1 {
   text-align: center;
   color: rgb(196, 196, 202);
+  font-size: 1.5rem;
 }
 
 h2 {
@@ -60,9 +68,11 @@ footer{
   }
   footer{
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content:space-between;
     width: 100%;
-    background-color: lavenderblush;
+    background-color: rgb(71, 61, 100);
+    align-items: center;
+
   }
   
 }
