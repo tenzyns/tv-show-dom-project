@@ -33,32 +33,36 @@ function setup() {
     cardEl.appendChild(synopsis);
 
     
-    });
+  });
 
-    //---------Search box ------------
-    const searchBox = document.getElementById("search");
+  //---------Search box ------------
+  const searchBox = document.getElementById("search");
+  searchBox.addEventListener("keyup", searchEpisodes);
+
+  function searchEpisodes(){
     const searchTerm = searchBox.value.toUpperCase();
-    searchBox.addEventListener("keyup", searchEpisodes);
+    const allCards = document.getElementsByClassName("card");
+    for(let i = 0; i < allCards.length; i++){
 
-    function searchEpisodes(){
-      const allCards = document.getElementsByClassName("card");
-       
-      for(let i = 0; i < allCards.length; i++){
+      const episodeName = allCards[i].getElementsByTagName("h2")[0];
+      const summary = allCards[i].getElementsByTagName("p")[0];
+      const episodeText = episodeName.textContent || episodeName.innerText;
+      const summaryText = summary.textContent || summary.innerText;
+      if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
+        allCards[i].style.display = "";
+      } else {
+          allCards[i].style.display = "none";
+        }
+    };
 
-        const episodeName = allCards[i].getElementsByTagName("h2")[0];
-        const summary = allCards[i].getElementsByTagName("p");
-        const episodeText = episodeName.textContent || episodeName.innerText;
-       const summaryText = summary.textContent || summary.innerText;
-        if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
-          allCards[i].style.display = "";
-        } else {
-            allCards[i].style.display = "none";
-          }
-      };
+  }  
+  //---Select box----
 
-    }  
-  }
 
+
+}
+
+  
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = `Got why ${episodeList.length} episode(s)`;
