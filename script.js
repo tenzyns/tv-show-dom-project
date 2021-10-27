@@ -1,4 +1,4 @@
-//You can edit ALL of the code here
+
 function setup() {
   const allEpisodes = getAllEpisodes();
   const rootElem = document.getElementById("root");
@@ -37,24 +37,36 @@ function setup() {
 
   //---------Search box ------------
   const searchBox = document.getElementById("search");
-  searchBox.addEventListener("keyup", searchEpisodes);
+  searchBox.addEventListener("keyup", searchEpisodes, false);
 
   function searchEpisodes(){
-    const searchTerm = searchBox.value.toUpperCase();
+    let searchTerm = searchBox.value.toUpperCase();
     const allCards = document.getElementsByClassName("card");
-    for(let i = 0; i < allCards.length; i++){
+    const spanEl = document.getElementById("result-count");
+     
+      let resultCount = 0;
 
+    for(let i = 0; i < allCards.length; i++){  
       const episodeName = allCards[i].getElementsByTagName("h2")[0];
       const summary = allCards[i].getElementsByTagName("p")[0];
       const episodeText = episodeName.textContent || episodeName.innerText;
       const summaryText = summary.textContent || summary.innerText;
       if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
         allCards[i].style.display = "";
-      } else {
+        resultCount++;        
+        } else {
           allCards[i].style.display = "none";
+          
         }
-    };
-
+        spanEl.innerHTML = `Showing ${resultCount}/${allEpisodes.length}`;
+        if (searchTerm === "") {
+          spanEl.style.display = "none";
+        } else {
+          spanEl.style.display = "inline";
+        }
+    }
+    
+    
   }  
   //---Select box----
 

@@ -42,6 +42,7 @@ h1 {
 h2 {
   font-weight: 100;
   border-style: ridge;
+  font-size: large;
   height: 4rem;
     
   }
@@ -57,6 +58,10 @@ footer{
     flex-wrap: wrap;
     justify-content: space-around;
     
+  }
+  #input{
+    display: flex;
+    justify-content: space-between;
   }
   .card{
     display: flex;

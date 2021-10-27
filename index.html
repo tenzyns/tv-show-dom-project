@@ -11,12 +11,19 @@
   <body>
     <header>
     <h1>Game of Thrones: The best running show of the decade</h1>
-    <label for="search">Search episode(s)</label>
-    <input type="text" id="search" value="" placeholder="Type keywords..">
-    <label for="select">Select episode</label>
-    <select id="select">
-    <option value="">--Choose an episode--</option>
-    </select>
+    <div id="input">
+      <div id="search-box">
+        <label for="search">Search episode(s)</label>
+        <input type="text" id="search" value="" placeholder="Type keywords..">
+        <span id="result-count"></span>
+      </div>
+      <div class="select-box">
+        <label for="select">Select episode</label>
+        <select id="select">
+        <option value="">--Choose an episode--</option>
+        </select>
+      </div>
+    </div>
     </header>
     <div id="root">
     </div>
