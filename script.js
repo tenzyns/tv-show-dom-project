@@ -7,6 +7,7 @@ function setup() {
   allEpisodes.forEach(episode => {
     const cardEl = document.createElement("article");
     cardEl.className = "card";
+    cardEl.setAttribute("id", episode.id.toString());
     rootElem.appendChild(cardEl);
 
     const headingEl = document.createElement("h2");
@@ -43,8 +44,7 @@ function setup() {
     let searchTerm = searchBox.value.toUpperCase();
     const allCards = document.getElementsByClassName("card");
     const spanEl = document.getElementById("result-count");
-     
-      let resultCount = 0;
+    let resultCount = 0;
 
     for(let i = 0; i < allCards.length; i++){  
       const episodeName = allCards[i].getElementsByTagName("h2")[0];
@@ -55,10 +55,12 @@ function setup() {
         allCards[i].style.display = "";
         resultCount++;        
         } else {
-          allCards[i].style.display = "none";
-          
+          allCards[i].style.display = "none";          
         }
+        //Shows search result count
         spanEl.innerHTML = `Showing ${resultCount}/${allEpisodes.length}`;
+        
+        //if search box is clear, count result text disappears
         if (searchTerm === "") {
           spanEl.style.display = "none";
         } else {
@@ -69,8 +71,26 @@ function setup() {
     
   }  
   //---Select box----
-
-
+  
+  allEpisodes.forEach(episode => {
+    let optEl = document.createElement("option");
+    optEl.value = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
+    optEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
+    let anchorEl = document.createElement("a");
+    anchorEl.href = `${episode.id}`;
+    optEl.appendChild(anchorEl);
+    let selectEl = document.getElementById("select");
+    selectEl.appendChild(optEl);
+    
+    selectEl.addEventListener("change", showEpisode);
+    function showEpisode() {
+      let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+      if (selectedValue === `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`) {
+        window.location.href = `#${episode.id}`;
+      }
+    }
+    });
+  
 
 }
 
