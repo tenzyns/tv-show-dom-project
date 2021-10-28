@@ -70,14 +70,14 @@ function setup() {
     
     
   }  
-  //---Select box----
+  //---Select and option elements----
   
   allEpisodes.forEach(episode => {
     let optEl = document.createElement("option");
     optEl.value = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
     optEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
     let anchorEl = document.createElement("a");
-    anchorEl.href = `${episode.id}`;
+    anchorEl.href = `${episode.id}`; //episode id is assigned as href attribute for navigation
     optEl.appendChild(anchorEl);
     let selectEl = document.getElementById("select");
     selectEl.appendChild(optEl);
@@ -87,7 +87,7 @@ function setup() {
       let selectedValue = selectEl.options[selectEl.selectedIndex].value;
       if (selectedValue === `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`) {
         window.location.href = `#${episode.id}`;
-      }
+      } 
     }
     });
   
@@ -95,9 +95,5 @@ function setup() {
 }
 
   
-function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got why ${episodeList.length} episode(s)`;
-}
 
 window.onload = setup;
