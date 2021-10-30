@@ -58,7 +58,7 @@ function setup() {
           allCards[i].style.display = "none";          
         }
         //Shows search result count
-        spanEl.innerHTML = `Showing ${resultCount}/${allEpisodes.length}`;
+        spanEl.innerHTML = `Showing ${resultCount}/${allEpisodes.length} episodes`;
         
         //if search box is clear, count result text disappears
         if (searchTerm === "") {
