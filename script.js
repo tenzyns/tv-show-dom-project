@@ -20,7 +20,7 @@ function makePageForEpisodes(showList) {
   showDiv.appendChild(selectShowEl);
   selectShowEl.appendChild(option);
 
-  //----List of all shows under selector----
+  //----Listing all shows under selector----
   showList.forEach(show => {
     const optionEl = document.createElement("option");
     optionEl.value = show.name;
@@ -36,14 +36,19 @@ function makePageForEpisodes(showList) {
     function showAllEpisodes() {
       let selectedValue = selectShowEl.options[selectShowEl.selectedIndex].value;
       if (selectedValue === show.name) {
+        window.scrollTo(0, 0); //scrolls to top after selecting a new show
         fetch(showApi)
         .then((response) => response.json())
         .then((data) => {
         
           const rootElem = document.getElementById("root");
-
+          while (rootElem.firstChild) {
+            // this removes the previous show's all episodes
+            rootElem.removeChild(rootElem.firstChild);
+          }
+          
           //extracting each of the episode data
-          data.forEach(episode => {
+          data.forEach(episode => {            
             const cardEl = document.createElement("article");
             cardEl.className = "card";
             cardEl.setAttribute("id", episode.id.toString());
@@ -78,7 +83,7 @@ function makePageForEpisodes(showList) {
         .catch((err) => console.log(err));
 
         
-      }
+      } //need an else statement to show when no show is selected
     }
   });
 
