@@ -10,16 +10,18 @@
 
   <body>
     <header>
-    <h1>Game of Thrones: The best running show of the decade</h1>
+    <h1>Great TV shows</h1>
     <div id="input">
       <div id="search-box">
         <label for="search">Search episode(s)</label>
         <input type="text" id="search" value="" placeholder="Type keywords..">
         <span id="result-count"></span>
       </div>
-      <div class="select-box">
-        <label for="select">Select episode</label>
-        <select id="select">
+      <div id="show-list">
+
+      </div>
+      <div class="select-box">       
+        <select id="select-episode">
         <option value="" selected>--Choose an episode--</option>
         </select>
       </div>
@@ -29,10 +31,12 @@
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <!-- <script src="episodes.js"></script> -->
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+
+    <script src="shows.js"></script>
   </body>
   <footer>
     <a href="https://www.tvmaze.com/">All data retrieved from TVmaze.com</a>
