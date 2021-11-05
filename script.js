@@ -21,20 +21,28 @@ function makePageForEpisodes(showList) {
   selectShowEl.appendChild(option);
 
   //----Listing all shows under selector----
+  showList.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+  //above for sorting list in alphabetical order
+
   showList.forEach(show => {
     const optionEl = document.createElement("option");
     optionEl.value = show.name;
     optionEl.innerText = show.name;
+    // if (show.id === 82) {
+    //   optionEl["Game of Thrones"].selected = "selected";
+    // }
     selectShowEl.appendChild(optionEl);
 
     let showId = show.id;
     let showApi = `https://api.tvmaze.com/shows/${showId}/episodes`;
     
     //EventListener for selected show
+   // selectShowEl.addEventListener("DOMContentLoaded", showAllEpisodes); this is not working
     selectShowEl.addEventListener("change", showAllEpisodes);
 
     function showAllEpisodes() {
       let selectedValue = selectShowEl.options[selectShowEl.selectedIndex].value;
+
       if (selectedValue === show.name) {
         window.scrollTo(0, 0); //scrolls to top after selecting a new show
         fetch(showApi)
@@ -90,8 +98,7 @@ function makePageForEpisodes(showList) {
             optEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
             let anchorEl = document.createElement("a");
             anchorEl.href = `${episode.id}`; //episode id is assigned as href attribute for navigation
-            optEl.appendChild(anchorEl);
-            
+            optEl.appendChild(anchorEl);            
             selectEl.appendChild(optEl);
             
             selectEl.addEventListener("change", showEpisode);
@@ -103,20 +110,12 @@ function makePageForEpisodes(showList) {
             }
           });  
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(`Something's wrong: ${err}`));
 
         
-      } //need an else statement to show when no show is selected
+      } //need an else statement to show when no show is selected??
     }
   });
-
-}
-/*
-  
-     
-         
-  
-
 
   //---------Search box ------------
   const searchBox = document.getElementById("search");
@@ -150,9 +149,9 @@ function makePageForEpisodes(showList) {
       }
     }  
     
-}
+  }
 
-  }*/
+}
   
 
 window.onload = setup;
