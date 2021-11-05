@@ -77,8 +77,31 @@ function makePageForEpisodes(showList) {
             cardEl.appendChild(urlEpisode);
             cardEl.appendChild(synopsis);  
 
-
           });
+          //---Select and option for episodes of each show----
+          let selectEl = document.getElementById("select-episode");
+          while (selectEl.firstChild) {
+            //this removes all episodes of previously selected show
+            selectEl.removeChild(selectEl.firstChild);
+          }
+          data.forEach(episode => {
+            let optEl = document.createElement("option");
+            optEl.value = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
+            optEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
+            let anchorEl = document.createElement("a");
+            anchorEl.href = `${episode.id}`; //episode id is assigned as href attribute for navigation
+            optEl.appendChild(anchorEl);
+            
+            selectEl.appendChild(optEl);
+            
+            selectEl.addEventListener("change", showEpisode);
+            function showEpisode() {
+              let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+              if (selectedValue === `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`) {
+                window.location.href = `#${episode.id}`;
+              } 
+            }
+          });  
         })
         .catch((err) => console.log(err));
 
@@ -89,41 +112,11 @@ function makePageForEpisodes(showList) {
 
 }
 /*
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        }
-        throw `${response.status} ${response.statusText}`;
-    })
-    .then(function(data) {
-          
-      });     
-         
-      //---Select and option elements----
   
-      data.forEach(episode => {
-        let optEl = document.createElement("option");
-        optEl.value = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
-        optEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
-        let anchorEl = document.createElement("a");
-        anchorEl.href = `${episode.id}`; //episode id is assigned as href attribute for navigation
-        optEl.appendChild(anchorEl);
-        let selectEl = document.getElementById("select");
-        selectEl.appendChild(optEl);
-        
-        selectEl.addEventListener("change", showEpisode);
-        function showEpisode() {
-          let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-          if (selectedValue === `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`) {
-            window.location.href = `#${episode.id}`;
-          } 
-        }
-      });  
-    })
-    .catch(function(error) {
-        return "An error occurred: " + error;
-    });
+     
+         
+  
+
 
   //---------Search box ------------
   const searchBox = document.getElementById("search");
