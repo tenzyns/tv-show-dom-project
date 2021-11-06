@@ -9,12 +9,20 @@ header{
     top: 0;
     z-index: 1;
     background-color: rgb(75, 63, 97);
-    padding: 1em;
+    padding: 0em;
+  }
+  #input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px groove rgb(114, 109, 38);
+  
+  }
+  .box{
+    margin: 1rem;
   }
 
-  #search-box {
-    margin: 1rem 0;
-  }
+  
 #root {
   color: rgb(236, 227, 227);
   text-align: center;
@@ -77,17 +85,20 @@ footer {
 
   header {
     width: 100%;
+    justify-content:space-evenly;
   }
   #root{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
   }
   
   #input{
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    margin: 2rem;
+   
+    
   }
   .card{
     display: flex;

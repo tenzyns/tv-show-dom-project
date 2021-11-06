@@ -35,11 +35,10 @@ function makePageForEpisodes(showList) {
 
     let showId = show.id;
     let showApi = `https://api.tvmaze.com/shows/${showId}/episodes`;
-    
-    //EventListener for selected show
-   // selectShowEl.addEventListener("DOMContentLoaded", showAllEpisodes); this is not working
+
     selectShowEl.addEventListener("change", showAllEpisodes);
 
+    //function to display all episodes of a selected show
     function showAllEpisodes() {
       let selectedValue = selectShowEl.options[selectShowEl.selectedIndex].value;
 
