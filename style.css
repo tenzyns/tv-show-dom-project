@@ -23,17 +23,24 @@ header{
   .box{
     margin: 1rem;
   }
-
-  
+#nav-link {
+  text-align: center;
+  font-size: large;
+  padding-bottom: 1em;
+}
+#nav-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 #root {
-  color: rgb(236, 227, 227);
+  color: rgb(185, 179, 179);
   text-align: center;
   position:relative;
   top: 15rem;
 }
 
-footer a {
-  color:rgb(211, 114, 162);
+a {
+  color:rgb(235, 162, 197);
   text-decoration: none;
   
 }
@@ -77,10 +84,17 @@ a:hover {
 }
 .show-ul {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content:space-between;
   text-align: left;
+  padding-top: 1em;
+  background-color: rgb(25, 73, 92);
 }
+.show-ul li {
+  min-width: 50%;
+  min-height: 2em;
 
+}
 
 h1 {
   text-align: center;
@@ -144,6 +158,9 @@ footer {
   .show-ul {
     justify-content: space-evenly;
     text-align: left;
+  }
+  .show-ul li {
+    width: 100%;
   }
   footer{
     flex-direction: row;

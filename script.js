@@ -2,11 +2,11 @@
 function setup() {
   const allShow = getAllShows();
   console.log(allShow.length);
-  makePageForEpisodes(allShow);
+  makePageForShows(allShow);
 
 }
 
-function makePageForEpisodes(showList) {
+function makePageForShows(showList) {
 
   // select element for picking a show
   const showDiv = document.getElementById("show-list");
@@ -19,62 +19,36 @@ function makePageForEpisodes(showList) {
   option.selected = "selected";
   showDiv.appendChild(selectShowEl);
   selectShowEl.appendChild(option);
+  const rootElem = document.getElementById("root");
 
-  //----Listing all shows on page load and under selector list----
+  //Sorting list in alphabetical order
   showList.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-  //above for sorting list in alphabetical order
+  
 
+  // hiding tv show search box
+  const episodeSearch = document.getElementsByClassName("episode-visibility");
+  for (let i = 0; i < episodeSearch.length; i++) {
+    episodeSearch[i].style.display = "none";
+  }
+
+  mainPage();
+  const navLink = document.getElementById("nav-link");
+  navLink.addEventListener("click", mainPage);
+
+  function mainPage () {
+    while (rootElem.firstChild) {
+      // this removes the previous page's all elements
+      rootElem.removeChild(rootElem.firstChild);
+    }
+    const navLink1 = document.getElementById("nav-link");
+    navLink1.style.display = "none";
+  //----Listing all shows on page load and under selector list----
   showList.forEach(show => {
     const optionEl = document.createElement("option");
     optionEl.value = show.name;
     optionEl.innerText = show.name;
     selectShowEl.appendChild(optionEl);
-    const rootElem = document.getElementById("root");
-
-    //creating initial page listing all shows
-    const showCard = document.createElement("article");
-    showCard.className = "show-card";
-    rootElem.appendChild(showCard);
-    const h2El = document.createElement("h2");
-    h2El.textContent = show.name;
-    showCard.appendChild(h2El);
-
-    const divShow = document.createElement("div");
-    divShow.className = "div-show";
-    showCard.appendChild(divShow);
-
-    const showImg = document.createElement("img");
-    showImg.className = "show-img";
-    showImg.src = show.image.medium;
-    showImg.alt = `Show cover-image for ${show.name}`;
-    divShow.appendChild(showImg);
-
-    const showSummary = document.createElement("p");
-    showSummary.className = "show-summary";
-    showSummary.innerHTML = show.summary;
-    divShow.appendChild(showSummary);
-
-    const showUnorderedLi = document.createElement("ul");
-    showUnorderedLi.className = "show-ul";
-    showUnorderedLi.style.listStyle = "none";
-    divShow.appendChild(showUnorderedLi);
-    const li1 = document.createElement("li");
-    li1.textContent = `Rated: ${show.rating.average}`;
-    const li2 = document.createElement("li");
-    li2.textContent = `Genres: ${show.genre}`;
-    const li3 = document.createElement("li");
-    li3.textContent = `Status: ${show.status}`;
-    const li4 = document.createElement("li");
-    li4.textContent = `Runtime: ${show.runtime}`;
-    showUnorderedLi.appendChild(li1);
-    showUnorderedLi.appendChild(li2);
-    showUnorderedLi.appendChild(li3);
-    showUnorderedLi.appendChild(li4);
-
     
-
-
-
     let showId = show.id;
     let showApi = `https://api.tvmaze.com/shows/${showId}/episodes`;
     selectShowEl.addEventListener("change", selectEvent);
@@ -91,15 +65,76 @@ function makePageForEpisodes(showList) {
         }
       }
     }
+    loadAllShows();
+    function loadAllShows() {
+ 
+      //creating initial page listing all shows
+      const showCard = document.createElement("article");
+      showCard.className = "show-card";
+      rootElem.appendChild(showCard);
+      const h2El = document.createElement("h2");
+      h2El.textContent = show.name;
+      showCard.appendChild(h2El);
+
+      const divShow = document.createElement("div");
+      divShow.className = "div-show";
+      showCard.appendChild(divShow);
+
+      const showImg = document.createElement("img");
+      showImg.className = "show-img";
+      showImg.style.cursor = "pointer";
+      if (show.image !== null) {
+        showImg.src = show.image.medium;
+      }
+      showImg.alt = `Show cover-image for ${show.name}`;
+      divShow.appendChild(showImg);
+
+      const showSummary = document.createElement("p");
+      showSummary.className = "show-summary";
+      showSummary.innerHTML = show.summary;
+      divShow.appendChild(showSummary);
+
+      const showUnorderedLi = document.createElement("ul");
+      showUnorderedLi.className = "show-ul";
+      showUnorderedLi.style.listStyle = "none";
+      divShow.appendChild(showUnorderedLi);
+      const li1 = document.createElement("li");
+      li1.textContent = `Rated: ${show.rating.average}`;
+      const li2 = document.createElement("li");
+      li2.textContent = `Genres: ${show.genres.join(" | ")}`;
+      const li3 = document.createElement("li");
+      li3.textContent = `Status: ${show.status}`;
+      const li4 = document.createElement("li");
+      li4.textContent = `Runtime: ${show.runtime} min`;
+      showUnorderedLi.appendChild(li1);
+      showUnorderedLi.appendChild(li2);
+      showUnorderedLi.appendChild(li3);
+      showUnorderedLi.appendChild(li4);
+
+      showImg.addEventListener("click", showAllEpisodes);
+    
+    }
 
     //function to display all episodes of a chosen show using Fetch promise
     function showAllEpisodes() {  
       window.scrollTo(0, 0); //scrolls to top after selecting a new show
+      const navLink1 = document.getElementById("nav-link");
+      navLink1.style.display = "block";
+      
+      for (let i = 0; i < episodeSearch.length; i++) {
+        episodeSearch[i].style.display = "block";
+      }
+      //hiding TV show search box
+      const showSearch = document.getElementById("show-search-div");
+      showSearch.style.display = "none";
+
+
+
+      //fetching api data
       fetch(showApi)
       .then((response) => response.json())
       .then((data) => {
-      
-        
+             
         while (rootElem.firstChild) {
           // this removes the previous show's all episodes
           rootElem.removeChild(rootElem.firstChild);
@@ -123,7 +158,9 @@ function makePageForEpisodes(showList) {
 
           //episode image attached to anchor tag
           const thumbNail = document.createElement("img");
-          thumbNail.src = episode.image.medium;
+          if (episode.image !== null) {
+            thumbNail.src = episode.image.medium;
+          }
           thumbNail.alt = `episode thumbnail for ${episode.name}`;
           thumbNail.className = "thumb-nail";
           urlEpisode.appendChild(thumbNail);
@@ -160,14 +197,12 @@ function makePageForEpisodes(showList) {
           }
         });  
       })
-      .catch((err) => alert(`Something's wrong: ${err}`));
-
-        
+      .catch((err) => alert(`Something's wrong: ${err}`));       
       
     }
   });
-
-  //---------Search box ------------
+}
+  //---------Search box episode search------------
   const searchBox = document.getElementById("search");
   searchBox.addEventListener("keyup", searchEpisodes, false);
 
