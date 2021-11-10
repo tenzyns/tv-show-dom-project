@@ -1,5 +1,5 @@
 
-// function setup() {
+function setup() {
   const allShow = getAllShows();
   console.log(allShow.length);
   makePageForEpisodes(allShow);
@@ -40,7 +40,7 @@ function makePageForEpisodes(showList) {
     showCard.appendChild(h2El);
 
     const divShow = document.createElement("div");
-    divShow.className = "divShow";
+    divShow.className = "div-show";
     showCard.appendChild(divShow);
 
     const showImg = document.createElement("img");
@@ -55,6 +55,8 @@ function makePageForEpisodes(showList) {
     divShow.appendChild(showSummary);
 
     const showUnorderedLi = document.createElement("ul");
+    showUnorderedLi.className = "show-ul";
+    showUnorderedLi.style.listStyle = "none";
     divShow.appendChild(showUnorderedLi);
     const li1 = document.createElement("li");
     li1.textContent = `Rated: ${show.rating.average}`;
@@ -64,7 +66,11 @@ function makePageForEpisodes(showList) {
     li3.textContent = `Status: ${show.status}`;
     const li4 = document.createElement("li");
     li4.textContent = `Runtime: ${show.runtime}`;
-    showUnorderedLi.appendChild(li1, li2, li3, li4);
+    showUnorderedLi.appendChild(li1);
+    showUnorderedLi.appendChild(li2);
+    showUnorderedLi.appendChild(li3);
+    showUnorderedLi.appendChild(li4);
+
     
 
 
