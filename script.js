@@ -25,11 +25,7 @@ function makePageForShows(showList) {
   showList.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
   
 
-  // hiding tv show search box
-  const episodeSearch = document.getElementsByClassName("episode-visibility");
-  for (let i = 0; i < episodeSearch.length; i++) {
-    episodeSearch[i].style.display = "none";
-  }
+ 
 
   mainPage();
   const navLink = document.getElementById("nav-link");
@@ -42,6 +38,17 @@ function makePageForShows(showList) {
     }
     const navLink1 = document.getElementById("nav-link");
     navLink1.style.display = "none";
+
+    // hiding tv episodes search box
+    const episodeSearch = document.getElementsByClassName("episode-visibility");
+    for (let i = 0; i < episodeSearch.length; i++) {
+      episodeSearch[i].style.display = "none";
+    }
+
+    //hiding TV show search box
+    const showSearch = document.getElementById("show-search-div");
+    showSearch.style.display = "block";
+
   //----Listing all shows on page load and under selector list----
   showList.forEach(show => {
     const optionEl = document.createElement("option");
@@ -216,12 +223,14 @@ function makePageForShows(showList) {
       const episodeName = allCards[i].getElementsByTagName("h2")[0];
       const summary = allCards[i].getElementsByTagName("p")[0];
       const episodeText = episodeName.textContent || episodeName.innerText;
+      if (summary !== null ) {
       const summaryText = summary.textContent || summary.innerText;
       if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
         allCards[i].style.display = "";
         resultCount++;        
       } else {
         allCards[i].style.display = "none";          
+      }
       }
       //Shows search result count
       spanEl.innerHTML = `Showing ${resultCount}/${allCards.length} episodes`;
