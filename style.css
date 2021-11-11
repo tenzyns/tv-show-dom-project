@@ -105,9 +105,10 @@ h1 {
 h2 {
   font-weight: 100;
   border-style: ridge;
-  border-color: rgb(223, 162, 49);
+  border: 2px solid rgb(223, 162, 49);
   font-size: large;
   height: 4rem;
+  border-radius: 3px;
     
   }
 footer {
@@ -134,7 +135,7 @@ footer {
   
   #input{
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
    
     
   }
@@ -153,13 +154,14 @@ footer {
 
   }
   .show-summary {
-    width: 55%;
+    width: 100%;
   }
   .show-ul {
     justify-content: space-evenly;
     text-align: left;
     background-color:inherit;
     border-left: 1px solid orange;
+    width: 60%;
   }
   .show-ul li {
     width: 100%;
