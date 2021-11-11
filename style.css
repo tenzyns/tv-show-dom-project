@@ -158,6 +158,8 @@ footer {
   .show-ul {
     justify-content: space-evenly;
     text-align: left;
+    background-color:inherit;
+    border-left: 1px solid orange;
   }
   .show-ul li {
     width: 100%;

@@ -1,7 +1,6 @@
 
 function setup() {
   const allShow = getAllShows();
-  console.log(allShow.length);
   makePageForShows(allShow);
 
 }
@@ -35,12 +34,14 @@ function makePageForShows(showList) {
     let resultCount = 0;
 
     for (let i = 0; i < showCards.length; i++) {
+      const genre = showCards[i].getElementsByTagName("li")[1];
       const showName = showCards[i].getElementsByTagName("h2")[0];
       const summary = showCards[i].getElementsByTagName("p")[0];
       const showText = showName.textContent || showName.innerText;
+      const genreText = genre.textContent || genre.innerText;
       if (summary !== null) {
         const summaryText = summary.textContent || summary.innerText;
-        if (showText.toUpperCase().includes(searchTerm) || summaryText.toUpperCase().indexOf(searchTerm) > -1) {
+        if (showText.toUpperCase().includes(searchTerm) || summaryText.toUpperCase().indexOf(searchTerm) > -1 || genreText.toUpperCase().includes(searchTerm)) {
           showCards[i].style.display = "";
           resultCount++;
         } else {
@@ -205,8 +206,8 @@ function makePageForShows(showList) {
           urlEpisode.appendChild(thumbNail);
 
           //episode summary
-          const synopsis = document.createElement("div");
-          synopsis.innerHTML = episode.summary;
+          const synopsis = document.createElement("div");          
+          synopsis.innerHTML = episode.summary;          
           cardEl.appendChild(headingEl);
           cardEl.appendChild(urlEpisode);
           cardEl.appendChild(synopsis);  
@@ -241,7 +242,7 @@ function makePageForShows(showList) {
     }
   });
 }
-  //---------Search box episode search------------
+  //---------Input element for episode search ------------
   const searchBox = document.getElementById("search");
   searchBox.addEventListener("keyup", searchEpisodes, false);
 
@@ -253,17 +254,26 @@ function makePageForShows(showList) {
 
     for(let i = 0; i < allCards.length; i++){  
       const episodeName = allCards[i].getElementsByTagName("h2")[0];
-      const summary = allCards[i].getElementsByTagName("p")[0];
       const episodeText = episodeName.textContent || episodeName.innerText;
-      if (summary !== null ) {
+      // if (allCards[i].getElementsByTagName("p") !== null){
+      const summary = allCards[i].getElementsByTagName("p")[0];
+  
+        
       const summaryText = summary.textContent || summary.innerText;
       if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
         allCards[i].style.display = "";
         resultCount++;        
       } else {
         allCards[i].style.display = "none";          
-      }
-      }
+      } 
+    // } else {
+    //     if (episodeText.toUpperCase().includes(searchTerm)) {
+    //       allCards[i].style.display = "";
+    //       resultCount++;
+    //     } else {
+    //       allCards[i].style.display = "none";
+    //     }
+    // }
       //Shows search result count
       spanEl.innerHTML = `Showing ${resultCount}/${allCards.length} episodes`;
       
@@ -273,8 +283,9 @@ function makePageForShows(showList) {
       } else {
         spanEl.style.display = "inline";
       }
-    }  
     
+     
+  }
   }
 
 }
