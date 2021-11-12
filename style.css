@@ -36,7 +36,6 @@ header{
   color: rgb(185, 179, 179);
   text-align: center;
   position:relative;
-  top: 15rem;
 }
 
 a {
@@ -113,10 +112,10 @@ h2 {
   }
 footer {
   display: flex;
+  justify-content:space-around;
   align-items: center;
   position: relative;
   top: 15rem;
-  
   
 }
 
@@ -130,6 +129,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    top: 5rem;
 
   }
   
