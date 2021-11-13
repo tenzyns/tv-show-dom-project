@@ -159,6 +159,7 @@ function makePageForShows(showList) {
 
       //function to display all episodes of a chosen show using Fetch promise
       function showAllEpisodes() {  
+        searchBox.value = "";
         window.scrollTo(0, 0); //scrolls to top after selecting a new show
         const navLink1 = document.getElementById("nav-link");
         navLink1.style.display = "block";
@@ -274,6 +275,7 @@ function makePageForShows(showList) {
         } else {
           allCards[i].style.display = "none";
         }
+       
       }
       //Shows search result count
       spanEl.innerHTML = `Showing ${resultCount}/${allCards.length} episodes`;
