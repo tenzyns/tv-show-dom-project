@@ -125,6 +125,10 @@ footer {
     width: 100%;
     justify-content:space-evenly;
   }
+
+  #input {
+    flex-wrap: wrap;
+  }
   #root{
     display: flex;
     flex-wrap: wrap;

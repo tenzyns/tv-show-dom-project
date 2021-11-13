@@ -29,9 +29,9 @@ function makePageForShows(showList) {
   function searchShow() {
     let searchTerm = showSearch.value.toUpperCase();
     const showCards = document.getElementsByClassName("show-card");
+    console.log(showCards.length);
     const spanElem = document.getElementById("show-count");
     let resultCount = 0;
-
     for (let i = 0; i < showCards.length; i++) {
       const genre = showCards[i].getElementsByTagName("li")[1];
       const showName = showCards[i].getElementsByTagName("h2")[0];
@@ -256,12 +256,12 @@ function makePageForShows(showList) {
     for(let i = 0; i < allCards.length; i++){  
       const episodeName = allCards[i].getElementsByTagName("h2")[0];
       const episodeText = episodeName.textContent || episodeName.innerText;
-
+      
       //Handling null for episodes having no summary
-      if (!allCards[i].getElementsByTagName("div")[0]) {      
+      if (allCards[i].querySelector("p") !== null) {      
         const summary = allCards[i].getElementsByTagName("p")[0];
         const summaryText = summary.textContent || summary.innerText;
-        if (episodeText.toUpperCase().includes(searchTerm)|| summaryText.toUpperCase().indexOf(searchTerm) > -1) {
+        if (episodeText.toUpperCase().includes(searchTerm) || summaryText.toUpperCase().includes(searchTerm)) {
           allCards[i].style.display = "";
           resultCount++;        
         } else {
