@@ -65,6 +65,7 @@ function makePageForShows(showList) {
 
   // To load the page containing all the shows
   function mainPage () {
+    window.scrollTo(0, 0);
     while (rootElem.firstChild) {
       // this removes the previous page's all elements
       rootElem.removeChild(rootElem.firstChild);
@@ -98,12 +99,7 @@ function makePageForShows(showList) {
         let selectedValue = selectShowEl.options[selectShowEl.selectedIndex].value;
         if (selectedValue === show.name) {
           showAllEpisodes();
-        } else {
-          while (rootElem.firstChild) {
-            // this removes the previous show's all episodes
-            rootElem.removeChild(rootElem.firstChild);
-          }
-        }
+        } 
       }
 
       loadAllShows();
@@ -163,7 +159,6 @@ function makePageForShows(showList) {
         window.scrollTo(0, 0); //scrolls to top after selecting a new show
         const navLink1 = document.getElementById("nav-link");
         navLink1.style.display = "block";
-
         rootElem.style.top = "15.5rem";
         
         //To display episode search and select box using class
@@ -200,7 +195,7 @@ function makePageForShows(showList) {
 
             //episode image attached to anchor tag
             const thumbNail = document.createElement("img");
-            if (episode.image !== null) {
+            if (episode.image) {
               thumbNail.src = episode.image.medium;
             }
             thumbNail.alt = `episode thumbnail for ${episode.name}`;
@@ -239,8 +234,7 @@ function makePageForShows(showList) {
             }
           });  
         })
-        .catch((err) => alert(`Something's wrong: ${err}`));       
-        
+        .catch((err) => alert(`Something's wrong: ${err}`));            
       }
     });
   }
@@ -259,7 +253,7 @@ function makePageForShows(showList) {
       const episodeText = episodeName.textContent || episodeName.innerText;
       
       //Handling null for episodes having no summary
-      if (allCards[i].querySelector("p") !== null) {      
+      if (allCards[i].querySelector("p")) {      
         const summary = allCards[i].getElementsByTagName("p")[0];
         const summaryText = summary.textContent || summary.innerText;
         if (episodeText.toUpperCase().includes(searchTerm) || summaryText.toUpperCase().includes(searchTerm)) {
@@ -274,8 +268,7 @@ function makePageForShows(showList) {
           resultCount++;
         } else {
           allCards[i].style.display = "none";
-        }
-       
+        }       
       }
       //Shows search result count
       spanEl.innerHTML = `Showing ${resultCount}/${allCards.length} episodes`;
@@ -288,7 +281,6 @@ function makePageForShows(showList) {
       }    
     }
   }
-
 }
   
 
