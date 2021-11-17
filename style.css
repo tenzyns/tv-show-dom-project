@@ -13,7 +13,7 @@ header{
     padding: 0em;
     
   }
-  #input{
+  .input{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,8 +126,10 @@ footer {
     justify-content:space-evenly;
   }
 
-  #input {
+  .input {
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
   }
   #root{
     display: flex;
@@ -137,12 +139,7 @@ footer {
 
   }
   
-  #input{
-    flex-direction: row;
-    justify-content: space-around;
-   
-    
-  }
+  
   /* Episodes cards below: */
   .card{
     display: flex;

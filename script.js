@@ -15,6 +15,7 @@ function makePageForShows(showList) {
   option.value = "";
   option.textContent = "--Select a TV show--";
   option.selected = "selected";
+  option.disabled = "disabled";
   showDiv.appendChild(selectShowEl);
   selectShowEl.appendChild(option);
   const rootElem = document.getElementById("root");
@@ -29,7 +30,6 @@ function makePageForShows(showList) {
   function searchShow() {
     let searchTerm = showSearch.value.toUpperCase();
     const showCards = document.getElementsByClassName("show-card");
-    console.log(showCards.length);
     const spanElem = document.getElementById("show-count");
     let resultCount = 0;
     for (let i = 0; i < showCards.length; i++) {
@@ -186,7 +186,11 @@ function makePageForShows(showList) {
 
             const headingEl = document.createElement("h2");
             //getting episode and season number with formatted double digits
-            headingEl.textContent = `S${String(episode.season).padStart(2, 0)}E${String(episode.number).padStart(2, 0)}: ${episode.name}`;
+            function pad(data) {
+              return String(data).padStart(2, 0);
+            }
+
+            headingEl.textContent = `S${pad(episode.season)}E${pad(episode.number)}: ${episode.name}`;
             
             //anchor tag to link back to TVmaze for credit
             const urlEpisode = document.createElement("a");
@@ -234,7 +238,7 @@ function makePageForShows(showList) {
             }
           });  
         })
-        .catch((err) => alert(`Something's wrong: ${err}`));            
+        .catch((err) => console.log(`Something's wrong: ${err}`));            
       }
     });
   }
