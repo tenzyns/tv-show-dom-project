@@ -3,19 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Tenzin Samdup (tenzyns)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
+    <header>
+
+      <h1>The Greatest TV shows are here!</h1>
+
+      <div class="input">        
+        <div id="search-box" class="box episode-visibility">
+          <label for="search">Search episode(s)</label>
+          <input type="text" id="search" value="" placeholder="Type keywords..">
+          <span id="result-count"></span>
+        </div>
+
+        <div id="show-search-div" class="show-visibility">
+          <label for="show-search">Search show(s)</label>
+          <input type="text" id="show-search" value="" placeholder="Type keywords">
+          <span id="show-count"></span>
+        </div>
+
+        <div id="show-list" class="box">
+          <!-- select option list for shows -->
+        </div>
+
+        <div class="box episode-visibility">       
+          <select id="select-episode">
+          <option value="" selected>--Choose an episode--</option>
+          </select>
+        </div>
+        
+      </div>
+      <nav id="nav-link">Back to all TV shows</nav>
+    </header>
     <div id="root">
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+
+    <script src="shows.js"></script>
   </body>
+
+  <footer>
+    <a href="https://www.tvmaze.com/">All data retrieved from TVmaze.com</a>
+    <p>Copyrights &copy; 2021 Tenzyns</p>
+  </footer>
+  
 </html>
